@@ -10,6 +10,7 @@
 	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
 	<script src="http://code.angularjs.org/1.0.2/angular.js"></script>
+	<script src="http://underscorejs.org/underscore-min.js"></script>
 	<script src="bootstrap.js"></script>
 	<script src="ctrl.js"></script>
 	<script src="domain.js"></script>
@@ -29,13 +30,8 @@
 	</div><!-- /header -->
 
 	<div data-role="content">	
-		<ol data-role="listview">
-		  <li></li>
-		  <li>Math</li>
-		  <li data-theme="e">English</li>
-		  <li>Math</li>
-		  <li>Training</li>
-		  <li></li>
+		<ol data-role="listview" ng-repeat="lesson in lessons">
+		  <li>{{lesson}}</li>
 		</ol>		
 	</div><!-- /content -->
 
