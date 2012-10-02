@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-<html ng-app> 
+<html ng-app="MSchedule"> 
 	<head>
 	<title>Lessons Schedule</title> 	
 	
@@ -10,18 +10,19 @@
 	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
 	<script src="http://code.angularjs.org/1.0.2/angular.js"></script>
+	<script src="ctrl.js"></script>
 	<script src="lib/jquery-mobile-angular-adapter.js"></script>
 </head> 
 
 <body> 
 
-<div data-role="page">
+<div data-role="page" ng-controller="ScheduleCtrl">
 
 	<div data-role="header">
 
-    <a href="" data-icon="arrow-l">Friday</a>
+    <a href="" data-icon="arrow-l">{{previous}}</a>
 		<h1>Monday</h1>
-    <a href="" data-icon="arrow-r" data-iconpos="right">Tuesday</a>
+    <a href="" data-icon="arrow-r" data-iconpos="right">{{next}}</a>
 
 	</div><!-- /header -->
 
