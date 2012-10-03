@@ -1,8 +1,6 @@
 "use strict";
 
-var msched = angular.module('MSchedule');
-
-msched.controller('ScheduleCtrl', ['$scope', function ($scope) {
+angular.module('MSchedule').controller('ScheduleCtrl', ['$scope', 'Domain', function ($scope, Domain) {
 
   function getDow(ts) {
     var dow = ts.getDay();
@@ -13,7 +11,7 @@ msched.controller('ScheduleCtrl', ['$scope', function ($scope) {
   }
   
   function getCurrentDayIdx(ts) {
-    var weekdaysNum = msched.weekdays.length;
+    var weekdaysNum = Domain.weekdays.length;
     var dow = getDow(ts);
     
     if (dow > weekdaysNum) {
@@ -21,9 +19,9 @@ msched.controller('ScheduleCtrl', ['$scope', function ($scope) {
     }
 
     var idx = dow;    
-    var lessonsNum = msched.lessons[dow].length;
-    var timeslot = msched.timeslots[lessonsNum - 1];
-    if (msched.hmToDate(ts.getHours(), ts.getMinutes()) > timeslot.end) {
+    var lessonsNum = Domain.lessons[dow].length;
+    var timeslot = Domain.timeslots[lessonsNum - 1];
+    if (Domain.hmToDate(ts.getHours(), ts.getMinutes()) > timeslot.end) {
       if (dow + 1 >= weekdaysNum) {
         idx = 0;
       } else {
@@ -35,7 +33,7 @@ msched.controller('ScheduleCtrl', ['$scope', function ($scope) {
   };
 
   function getCurrentLessonIdx(ts) {
-    var weekdaysNum = msched.weekdays.length;
+    var weekdaysNum = Domain.weekdays.length;
     var dow = getDow(ts);
     
     if (dow > weekdaysNum) {
@@ -43,9 +41,9 @@ msched.controller('ScheduleCtrl', ['$scope', function ($scope) {
     }
 
     var idx = -1;
-    var lessons = msched.lessons[dow];
-    var timeslots = msched.timeslots;
-    var relTs = msched.hmToDate(ts.getHours(), ts.getMinutes());
+    var lessons = Domain.lessons[dow];
+    var timeslots = Domain.timeslots;
+    var relTs = Domain.hmToDate(ts.getHours(), ts.getMinutes());
     for (var i = 0; i < lessons.length; i++) {
       var ts0 = i == 0 ? timeslots[0].start : timeslots[i - 1].end;
       var ts1 = timeslots[i].end;
@@ -59,12 +57,12 @@ msched.controller('ScheduleCtrl', ['$scope', function ($scope) {
   };
   
   function updateLabels() {
-    $scope.current = msched.weekdays[$scope.weekdayIdx];
+    $scope.current = Domain.weekdays[$scope.weekdayIdx];
   };
   
   function updateLessons() {
-    $scope.lessons = _.map(msched.lessons[$scope.weekdayIdx], function(l) {
-      return l != null ? msched.subjects[l] : null;
+    $scope.lessons = _.map(Domain.lessons[$scope.weekdayIdx], function(l) {
+      return l != null ? Domain.subjects[l] : null;
     });
     var ts = new Date();
     $scope.lessonIdx = $scope.weekdayIdx == getDow(ts) ? getCurrentLessonIdx(ts) : -1;
@@ -78,12 +76,12 @@ msched.controller('ScheduleCtrl', ['$scope', function ($scope) {
   $scope.weekdayIdx = getCurrentDayIdx(new Date());
 
   $scope.backward = function() {
-    $scope.weekdayIdx = $scope.weekdayIdx - 1 >= 0 ? $scope.weekdayIdx - 1 : msched.weekdays.length - 1;
+    $scope.weekdayIdx = $scope.weekdayIdx - 1 >= 0 ? $scope.weekdayIdx - 1 : Domain.weekdays.length - 1;
     update();
   };
   
   $scope.forward = function() {
-    $scope.weekdayIdx = $scope.weekdayIdx + 1 < msched.weekdays.length ? $scope.weekdayIdx + 1 : 0;
+    $scope.weekdayIdx = $scope.weekdayIdx + 1 < Domain.weekdays.length ? $scope.weekdayIdx + 1 : 0;
     update();
   };
   
@@ -92,10 +90,10 @@ msched.controller('ScheduleCtrl', ['$scope', function ($scope) {
   };
   
   $scope.setSelectedLesson = function(idx) {
-    var weekdayLessons = msched.lessons[$scope.weekdayIdx];
+    var weekdayLessons = Domain.lessons[$scope.weekdayIdx];
     var l = weekdayLessons[idx];
-    var tslot = msched.timeslots[idx];
-    $scope.subject = l != null ? msched.subjects[l] : null;
+    var tslot = Domain.timeslots[idx];
+    $scope.subject = l != null ? Domain.subjects[l] : null;
     
     function formatMinute(minute) {
       var s = "";

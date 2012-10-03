@@ -1,68 +1,75 @@
 "use strict";
 
-var msched = angular.module('MSchedule');
+angular.module('MSchedule').factory('Domain', function() {
 
-msched.weekdays = [
-  "Poniedziałek",
-  "Wtorek",
-  "Środa",
-  "Czwartek",
-  "Piątek"
-];
+  function hmToDate(hour, minute) {
+    return new Date(0, 0, 1, hour, minute);
+  };
 
-msched.hmToDate = function(hour, minute) {
-  return new Date(0, 0, 1, hour, minute);
-};
+  function Timeslot(startHour, startMinute, endHour, endMinute) {
+    this.start = hmToDate(startHour, startMinute);
+    this.end = hmToDate(endHour, endMinute);
+  };
 
-msched.Timeslot = function(startHour, startMinute, endHour, endMinute) {
-  this.start = msched.hmToDate(startHour, startMinute);
-  this.end = msched.hmToDate(endHour, endMinute);
-}
+  Timeslot.prototype = {
 
-msched.Timeslot.prototype = {
+    getStartHour: function() {
+      return this.start.getHours();
+    },
+    
+    getStartMinute: function() {
+      return this.start.getMinutes();
+    },
+    
+    getEndHour: function() {
+      return this.end.getHours();
+    },
+    
+    getEndMinute: function() {
+      return this.end.getMinutes();
+    }
+    
+  };
 
-  getStartHour: function() {
-    return this.start.getHours();
-  },
-  
-  getStartMinute: function() {
-    return this.start.getMinutes();
-  },
-  
-  getEndHour: function() {
-    return this.end.getHours();
-  },
-  
-  getEndMinute: function() {
-    return this.end.getMinutes();
-  }
-  
-};
+  return {
 
-msched.timeslots = [
-  new msched.Timeslot(8, 0, 8, 45),
-  new msched.Timeslot(8, 50, 9, 35),
-  new msched.Timeslot(9, 45, 10, 30),
-  new msched.Timeslot(10, 40, 11, 25),
-  new msched.Timeslot(11, 45, 12, 30),
-  new msched.Timeslot(12, 45, 13, 30),
-  new msched.Timeslot(13, 35, 14, 20),
-  new msched.Timeslot(14, 25, 15, 10)
-];
+    weekdays: [
+      "Poniedziałek",
+      "Wtorek",
+      "Środa",
+      "Czwartek",
+      "Piątek"
+    ],
 
-msched.subjects = {
-  ew: "Edukacja wczesnoszkolna",
-  inf: "Zajęcia komputerowe",
-  ewsg: "Wychowanie fizyczne",
-  ang: "Język angielski",
-  rel: "Religia"
-};
+    subjects: {
+      ew: "Edukacja wczesnoszkolna",
+      inf: "Zajęcia komputerowe",
+      ewsg: "Wychowanie fizyczne",
+      ang: "Język angielski",
+      rel: "Religia"
+    },
 
-msched.lessons = [
-  ["ew", "ew", "ew", "inf"],
-  ["ew", "ewsg", "ang", "ew", "ew"],
-  ["ew", "ew", "ew", "rel", "ang"],
-  ["ew", "ewsg", "ew", "ew", "ew"],
-  [null, null, "rel", "ew", "ew", "ew"]
-];
+    lessons: [
+      ["ew", "ew", "ew", "inf"],
+      ["ew", "ewsg", "ang", "ew", "ew"],
+      ["ew", "ew", "ew", "rel", "ang"],
+      ["ew", "ewsg", "ew", "ew", "ew"],
+      [null, null, "rel", "ew", "ew", "ew"]
+    ],
+
+    timeslots: [
+      new Timeslot(8, 0, 8, 45),
+      new Timeslot(8, 50, 9, 35),
+      new Timeslot(9, 45, 10, 30),
+      new Timeslot(10, 40, 11, 25),
+      new Timeslot(11, 45, 12, 30),
+      new Timeslot(12, 45, 13, 30),
+      new Timeslot(13, 35, 14, 20),
+      new Timeslot(14, 25, 15, 10)
+    ],
+    
+    hmToDate: hmToDate
+
+  };
+});
 
