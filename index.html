@@ -18,9 +18,9 @@
 	<script src="lib/jquery-mobile-angular-adapter.js"></script>
 </head> 
 
-<body> 
+<body ng-controller="ScheduleCtrl"> 
 
-<div data-role="page" ng-controller="ScheduleCtrl">
+<div id="lessons" data-role="page">
 
 	<div data-role="header">
 
@@ -32,8 +32,23 @@
 
 	<div data-role="content">	
 		<ol data-role="listview" ngm-swiperight="forward()" ngm-swipeleft="backward()">
-		  <li ng-repeat="lesson in lessons" data-theme="{{theme($index)}}">{{lesson}}</li>
+		  <li ng-repeat="lesson in lessons" data-theme="{{theme($index)}}">
+		    <a href="#lesson-details" ng-click="setSelectedLesson($index)">{{lesson}}</a>
+	    </li>
 		</ol>		
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+<div id="lesson-details" data-role="page" data-add-back-btn="true">
+
+	<div data-role="header">
+    <a href="#lessons" data-icon="back" data-iconpos="notext"></a>
+		<h1>Szczegóły lekcji</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+	  <div>Temat: {{subject}}</div>
 	</div><!-- /content -->
 
 </div><!-- /page -->
