@@ -48,10 +48,14 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
-	  <ul data-role="listview">
-	    <li>Temat: {{subject}}</li>
-	    <li>Czas: {{startTime}} &ndash; {{endTime}}</li>
-	  </ul>	
+    <div data-role="fieldcontain">
+        <label for="subject">Temat:</label>
+        <input type="text" id="subject" value="{{subject}}" readonly="readonly" />
+    </div>	
+    <div data-role="fieldcontain">
+        <label for="time">Czas:</label>
+        <input type="text" id="time" value="{{startTime}} &ndash; {{endTime}}" readonly="readonly" />
+    </div>	
 	</div><!-- /content -->
 
 </div><!-- /page -->
