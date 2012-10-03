@@ -94,8 +94,21 @@ msched.controller('ScheduleCtrl', ['$scope', function ($scope) {
   $scope.setSelectedLesson = function(idx) {
     var weekdayLessons = msched.lessons[$scope.weekdayIdx];
     var l = weekdayLessons[idx];
+    var tslot = msched.timeslots[idx];
     $scope.subject = l != null ? msched.subjects[l] : null;
-    console.log("Subject: " + $scope.subject);
+    
+    function formatMinute(minute) {
+      var s = "";
+      if (minute != null) {
+        s = minute.toString();
+        if (s.length == 1) {
+          s += "0";
+        }
+      }
+      return s;
+    };
+    $scope.startTime = tslot.getStartHour() + ":" + formatMinute(tslot.getStartMinute());
+    $scope.endTime = tslot.getEndHour() + ":" + formatMinute(tslot.getEndMinute());
   };
   
   $scope.subject = null;
