@@ -1,0 +1,10 @@
+{
+  "name": "Plan lekcji",
+  "description": "Plan lekcji dla Patryka do klasy III.",
+  "version": "1.0",
+  "app": {
+    "launch": {
+      "local_path": "index.html"
+    }
+  }
+}
