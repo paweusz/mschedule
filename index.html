@@ -12,15 +12,15 @@
 	<script src="lib/jquery.mobile-1.1.1.min.js"></script>
 	<script src="lib/angular-1.0.2.min.js"></script>
 	<script src="lib/underscore-min.js"></script>
-	<script src="js/bootstrap.js"></script>
+	<script src="js/app.js"></script>
 	<script src="js/ctrl.js"></script>
 	<script src="js/domain.js"></script>
 	<script src="lib/jquery-mobile-angular-adapter.js"></script>
 </head> 
 
-<body> 
+<body ng-controller="ScheduleCtrl"> 
 
-<div data-role="page" ng-controller="ScheduleCtrl">
+<div id="lessons" data-role="page">
 
 	<div data-role="header">
 
@@ -32,8 +32,30 @@
 
 	<div data-role="content">	
 		<ol data-role="listview" ngm-swiperight="forward()" ngm-swipeleft="backward()">
-		  <li ng-repeat="lesson in lessons" data-theme="{{theme($index)}}">{{lesson}}</li>
+		  <li ng-repeat="lesson in lessons" data-theme="{{theme($index)}}">
+		    <a href="#lesson-details" ng-click="setSelectedLesson($index)">{{lesson}}</a>
+	    </li>
 		</ol>		
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+<div id="lesson-details" data-role="page" data-add-back-btn="true">
+
+	<div data-role="header">
+    <a href="#lessons" data-icon="back" data-iconpos="notext"></a>
+		<h1>Szczegóły lekcji</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+    <div data-role="fieldcontain">
+        <label for="subject">Temat:</label>
+        <input type="text" id="subject" value="{{subject}}" readonly="readonly" />
+    </div>	
+    <div data-role="fieldcontain">
+        <label for="time">Czas:</label>
+        <input type="text" id="time" value="{{startTime}} &ndash; {{endTime}}" readonly="readonly" />
+    </div>	
 	</div><!-- /content -->
 
 </div><!-- /page -->

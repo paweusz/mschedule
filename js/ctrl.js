@@ -58,38 +58,60 @@ msched.controller('ScheduleCtrl', ['$scope', function ($scope) {
     return idx;
   };
   
-  function updateLabels(scope) {
-    scope.current = msched.weekdays[scope.index];
+  function updateLabels() {
+    $scope.current = msched.weekdays[$scope.weekdayIdx];
   };
   
-  function updateLessons(scope) {
-    scope.lessons = _.map(msched.lessons[scope.index], function(l) {
+  function updateLessons() {
+    $scope.lessons = _.map(msched.lessons[$scope.weekdayIdx], function(l) {
       return l != null ? msched.subjects[l] : null;
     });
     var ts = new Date();
-    scope.lessonIdx = scope.index == getDow(ts) ? getCurrentLessonIdx(ts) : -1;
+    $scope.lessonIdx = $scope.weekdayIdx == getDow(ts) ? getCurrentLessonIdx(ts) : -1;
   };
   
-  function update(scope) {
-    updateLabels(scope);
-    updateLessons(scope);
+  function update() {
+    updateLabels();
+    updateLessons();
   };
   
-  $scope.index = getCurrentDayIdx(new Date());
+  $scope.weekdayIdx = getCurrentDayIdx(new Date());
 
   $scope.backward = function() {
-    this.index = this.index - 1 >= 0 ? this.index - 1 : msched.weekdays.length - 1;
-    update(this);
+    $scope.weekdayIdx = $scope.weekdayIdx - 1 >= 0 ? $scope.weekdayIdx - 1 : msched.weekdays.length - 1;
+    update();
   };
   
   $scope.forward = function() {
-    this.index = this.index + 1 < msched.weekdays.length ? this.index + 1 : 0;
-    update(this);
+    $scope.weekdayIdx = $scope.weekdayIdx + 1 < msched.weekdays.length ? $scope.weekdayIdx + 1 : 0;
+    update();
   };
   
   $scope.theme = function(idx) {
-    return this.lessonIdx == idx ? "e" : "c";
+    return $scope.lessonIdx == idx ? "e" : "c";
   };
+  
+  $scope.setSelectedLesson = function(idx) {
+    var weekdayLessons = msched.lessons[$scope.weekdayIdx];
+    var l = weekdayLessons[idx];
+    var tslot = msched.timeslots[idx];
+    $scope.subject = l != null ? msched.subjects[l] : null;
+    
+    function formatMinute(minute) {
+      var s = "";
+      if (minute != null) {
+        s = minute.toString();
+        if (s.length == 1) {
+          s += "0";
+        }
+      }
+      return s;
+    };
+    $scope.startTime = tslot.getStartHour() + ":" + formatMinute(tslot.getStartMinute());
+    $scope.endTime = tslot.getEndHour() + ":" + formatMinute(tslot.getEndMinute());
+  };
+  
+  $scope.subject = null;
   
   update($scope);
   
