@@ -40,14 +40,14 @@ msched.Timeslot.prototype = {
 };
 
 msched.timeslots = [
-  {id: 1, timeslot: new msched.Timeslot(8, 0, 8, 45)},
-  {id: 2, timeslot: new msched.Timeslot(8, 50, 9, 35)},
-  {id: 3, timeslot: new msched.Timeslot(9, 45, 10, 30)},
-  {id: 4, timeslot: new msched.Timeslot(10, 40, 11, 25)},
-  {id: 5, timeslot: new msched.Timeslot(11, 45, 12, 30)},
-  {id: 6, timeslot: new msched.Timeslot(12, 45, 13, 30)},
-  {id: 7, timeslot: new msched.Timeslot(13, 35, 14, 20)},
-  {id: 8, timeslot: new msched.Timeslot(14, 25, 15, 10)}
+  new msched.Timeslot(8, 0, 8, 45),
+  new msched.Timeslot(8, 50, 9, 35),
+  new msched.Timeslot(9, 45, 10, 30),
+  new msched.Timeslot(10, 40, 11, 25),
+  new msched.Timeslot(11, 45, 12, 30),
+  new msched.Timeslot(12, 45, 13, 30),
+  new msched.Timeslot(13, 35, 14, 20),
+  new msched.Timeslot(14, 25, 15, 10)
 ];
 
 msched.subjects = {

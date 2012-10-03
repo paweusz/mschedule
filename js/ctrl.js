@@ -4,8 +4,6 @@ var msched = angular.module('MSchedule');
 
 msched.controller('ScheduleCtrl', ['$scope', function ($scope) {
 
-  $scope.index = 0;
-
   function updateLabels(scope) {
     scope.current = msched.weekdays[scope.index];
   };
@@ -21,6 +19,34 @@ msched.controller('ScheduleCtrl', ['$scope', function ($scope) {
     updateLessons(scope);
   };
   
+  function getCurrentDayIdx(ts) {
+    var weekdaysNum = msched.weekdays.length;
+    var dow = ts.getDay();
+    if (dow == 0) {
+      dow = 7;
+    }
+    dow--;
+    
+    if (dow > weekdaysNum) {
+      return 0;
+    }
+
+    var idx = dow;    
+    var lessonsNum = msched.lessons[dow].length;
+    var timeslot = msched.timeslots[lessonsNum - 1];
+    if (msched.hmToDate(ts.getHours(), ts.getMinutes()) > timeslot.end) {
+      if (dow + 1 >= weekdaysNum) {
+        idx = 0;
+      } else {
+        idx = dow + 1;
+      }
+    }    
+
+    return idx;
+  };
+  
+  $scope.index = getCurrentDayIdx(new Date());
+
   $scope.backward = function() {
     this.index = this.index - 1 >= 0 ? this.index - 1 : msched.weekdays.length - 1;
     update(this);
