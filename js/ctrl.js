@@ -7,10 +7,7 @@ msched.controller('ScheduleCtrl', ['$scope', function ($scope) {
   $scope.index = 0;
 
   function updateLabels(scope) {
-    var weekdays = msched.weekdays;
-    scope.previous = weekdays[scope.index > 0 ? scope.index - 1 : weekdays.length - 1].name;
-    scope.current = weekdays[scope.index].name;
-    scope.next = weekdays[scope.index + 1 < weekdays.length ? scope.index + 1 : 0].name;
+    scope.current = msched.weekdays[scope.index].name;
   };
   
   function updateLessons(scope) {
