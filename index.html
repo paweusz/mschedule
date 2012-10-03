@@ -32,7 +32,7 @@
 
 	<div data-role="content">	
 		<ol data-role="listview" ngm-swiperight="forward()" ngm-swipeleft="backward()">
-		  <li ng-repeat="lesson in lessons">{{lesson}}</li>
+		  <li ng-repeat="lesson in lessons" data-theme="{{theme($index)}}">{{lesson}}</li>
 		</ol>		
 	</div><!-- /content -->
 
