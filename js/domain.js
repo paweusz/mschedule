@@ -3,11 +3,11 @@
 var msched = angular.module('MSchedule');
 
 msched.weekdays = [
-  {id: "Mon", name: "Poniedziałek"},
-  {id: "Tue", name: "Wtorek"},
-  {id: "Wed", name: "Środa"},
-  {id: "Thu", name: "Czwartek"},
-  {id: "Fri", name: "Piątek"}
+  "Poniedziałek",
+  "Wtorek",
+  "Środa",
+  "Czwartek",
+  "Piątek"
 ];
 
 msched.hmToDate = function(hour, minute) {
