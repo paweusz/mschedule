@@ -6,5 +6,8 @@
     "launch": {
       "local_path": "index.html"
     }
+  },
+  "icons": {
+    "128": "icons/lessons-icon.png"
   }
 }
