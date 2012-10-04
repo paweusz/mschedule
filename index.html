@@ -33,7 +33,7 @@
 	<div data-role="content">	
 		<ol data-role="listview">
 		  <li ng-repeat="lesson in weekday.lessons" data-theme="{{theme(weekday.idx, $index)}}">
-		    <a href="#lesson-details" ng-click="setSelectedLesson(weekday.idx, $index)" data-transition="slideup">{{lesson}}</a>
+		    <a href="#lesson-details" ng-click="setSelectedLesson(weekday.idx, $index)" data-transition="fade">{{lesson}}</a>
 	    </li>
 		</ol>		
 	</div><!-- /content -->
@@ -43,7 +43,7 @@
 <div id="lesson-details" data-role="page" data-add-back-btn="true">
 
 	<div data-role="header">
-    <a data-rel="back" data-icon="back" data-iconpos="notext" data-transition="slidedown"></a>
+    <a data-rel="back" data-icon="back" data-iconpos="notext" data-transition="fade"></a>
 		<h1>Szczegóły lekcji</h1>
 	</div><!-- /header -->
 
