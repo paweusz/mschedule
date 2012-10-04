@@ -36,11 +36,11 @@
     return {
 
       weekdays: [
-        "Poniedziałek",
-        "Wtorek",
-        "Środa",
-        "Czwartek",
-        "Piątek"
+        {id: "mon", name: "Poniedziałek"},
+        {id: "tue", name: "Wtorek"},
+        {id: "wed", name: "Środa"},
+        {id: "thu", name: "Czwartek"},
+        {id: "fri", name: "Piątek"}
       ],
 
       subjects: {

@@ -58,43 +58,34 @@
       return idx;
     }
     
-    function updateLabels() {
-      $scope.current = Domain.weekdays[$scope.weekdayIdx];
-    }
+    //--------------------------------------------------------------------------
     
-    function updateLessons() {
-      $scope.lessons = _.map(Domain.lessons[$scope.weekdayIdx], function(l) {
-        return l !== null ? Domain.subjects[l] : null;
-      });
-      var ts = new Date();
-      $scope.lessonIdx = $scope.weekdayIdx === getDow(ts) ? getCurrentLessonIdx(ts) : -1;
-    }
-    
-    function update() {
-      updateLabels();
-      updateLessons();
-    }
-    
-    $scope.weekdayIdx = getCurrentDayIdx(new Date());
+    var ts = new Date();
+    var currentWeekdayIdx = getCurrentDayIdx(ts);
+    var currentLessonIdx = getCurrentLessonIdx(ts);
 
-    $scope.backward = function() {
-      $scope.weekdayIdx = $scope.weekdayIdx - 1 >= 0 ? $scope.weekdayIdx - 1 : Domain.weekdays.length - 1;
-      update();
+    $scope.weekdays = _.map(Domain.weekdays, function(weekday, idx) {
+      return {
+        id: weekday.id,
+        name: weekday.name,
+        lessons: _.map(Domain.lessons[idx], function(l) {
+          return l !== null ? Domain.subjects[l] : null;
+        }),
+        nextId: idx + 1 < Domain.weekdays.length ? Domain.weekdays[idx + 1].id : Domain.weekdays[0].id,
+        prevId: idx > 0 ? Domain.weekdays[idx - 1].id : Domain.weekdays[Domain.weekdays.length - 1].id,
+        idx: idx,
+        lessonIdx: idx === currentWeekdayIdx ? currentLessonIdx : -1
+      };
+    });
+
+    $scope.theme = function(weekdayIdx, lessonIdx) {
+      return currentWeekdayIdx === weekdayIdx && currentLessonIdx === lessonIdx ? "e" : "c";
     };
     
-    $scope.forward = function() {
-      $scope.weekdayIdx = $scope.weekdayIdx + 1 < Domain.weekdays.length ? $scope.weekdayIdx + 1 : 0;
-      update();
-    };
-    
-    $scope.theme = function(idx) {
-      return $scope.lessonIdx === idx ? "e" : "c";
-    };
-    
-    $scope.setSelectedLesson = function(idx) {
-      var weekdayLessons = Domain.lessons[$scope.weekdayIdx];
-      var l = weekdayLessons[idx];
-      var tslot = Domain.timeslots[idx];
+    $scope.setSelectedLesson = function(weekdayIdx, lessonIdx) {
+      var weekdayLessons = Domain.lessons[weekdayIdx];
+      var l = weekdayLessons[lessonIdx];
+      var tslot = Domain.timeslots[lessonIdx];
       $scope.subject = l !== null ? Domain.subjects[l] : null;
       
       function formatMinute(minute) {
@@ -111,10 +102,7 @@
       $scope.endTime = tslot.getEndHour() + ":" + formatMinute(tslot.getEndMinute());
     };
     
-    $scope.subject = null;
-    
-    update($scope);
-    
+    window.location.hash = Domain.weekdays[currentWeekdayIdx].id;
   }]);
 }());
 
