@@ -1,5 +1,6 @@
-"use strict";
-
-angular.module('MSchedule', []);
-
+/*global angular:false*/
+(function () {
+  "use strict";
+  angular.module('MSchedule', []);
+}());
 
