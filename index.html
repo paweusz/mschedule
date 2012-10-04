@@ -33,7 +33,7 @@
 	<div data-role="content">	
 		<ol data-role="listview" ngm-swiperight="backward()" ngm-swipeleft="forward()">
 		  <li ng-repeat="lesson in lessons" data-theme="{{theme($index)}}">
-		    <a href="#lesson-details" ng-click="setSelectedLesson($index)">{{lesson}}</a>
+		    <a href="#lesson-details" ng-click="setSelectedLesson($index)" data-transition="slideup">{{lesson}}</a>
 	    </li>
 		</ol>		
 	</div><!-- /content -->
@@ -43,7 +43,7 @@
 <div id="lesson-details" data-role="page" data-add-back-btn="true">
 
 	<div data-role="header">
-    <a href="#lessons" data-icon="back" data-iconpos="notext"></a>
+    <a href="#lessons" data-icon="back" data-iconpos="notext" data-transition="slidedown"></a>
 		<h1>Szczegóły lekcji</h1>
 	</div><!-- /header -->
 
