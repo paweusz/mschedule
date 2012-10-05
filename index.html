@@ -22,7 +22,7 @@
 
 <div id="{{weekday.id}}" data-role="page" ng-repeat="weekday in weekdays">
 
-	<div data-role="header">
+	<div data-role="header" data-position="fixed">
 
     <a href="#{{weekday.prevId}}" data-icon="arrow-l" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
 		<h1>{{weekday.name}}</h1>
@@ -42,7 +42,7 @@
 
 <div id="lesson-details" data-role="page" data-add-back-btn="true">
 
-	<div data-role="header">
+	<div data-role="header" data-position="fixed">
     <a data-rel="back" data-icon="back" data-iconpos="notext" data-transition="fade"></a>
 		<h1>Szczegóły lekcji</h1>
 	</div><!-- /header -->
