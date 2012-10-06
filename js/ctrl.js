@@ -16,7 +16,7 @@
       var weekdaysNum = Domain.weekdays.length;
       var dow = getDow(ts);
       
-      if (dow > weekdaysNum) {
+      if (dow >= weekdaysNum) {
         return 0;
       }
 
@@ -38,7 +38,7 @@
       var weekdaysNum = Domain.weekdays.length;
       var dow = getDow(ts);
       
-      if (dow > weekdaysNum) {
+      if (dow >= weekdaysNum) {
         return -1;
       }
 
