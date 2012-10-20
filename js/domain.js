@@ -48,7 +48,8 @@
         inf: "Zajęcia komputerowe",
         ewsg: "Wychowanie fizyczne",
         ang: "Język angielski",
-        rel: "Religia"
+        rel: "Religia",
+        kmat: "Kółko matematyczne"
       },
 
       lessons: [
@@ -56,7 +57,7 @@
         ["ew", "ewsg", "ang", "ew", "ew"],
         ["ew", "ew", "ew", "rel", "ang"],
         ["ew", "ewsg", "ew", "ew", "ew"],
-        [null, null, "rel", "ew", "ew", "ew"]
+        ["kmat", "kmat", "rel", "ew", "ew", "ew"]
       ],
 
       timeslots: [
